@@ -1,6 +1,11 @@
-# Zoomiz
+# <img src="./images/zoomiz.png" width="45" style="vertical-align: middle; margin-right: 10px;"> <span style="vertical-align: middle;">Zoomiz</span>
 
-Zoomiz is a high-performance navigation tool for Visual Studio Code, inspired by the mechanics of Flash.vim. It enables rapid cursor movement across the visible editor viewport without relying on the mouse or repetitive arrow key usage.
+Zoomiz is a high-performance navigation tool for Visual Studio Code, inspired by the mechanics of Flash.nvim. It enables rapid cursor movement across the visible editor viewport without relying on the mouse or repetitive arrow key usage.
+
+<br>
+<p align="center">
+  <img src="./images/zoomiz.gif" alt="Zoomiz Demo" width="700">
+</p>
 
 ## Features
 
