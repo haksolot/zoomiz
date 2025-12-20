@@ -1,0 +1,106 @@
+{
+  "name": "zoomiz",
+  "displayName": "zoomiz",
+  "description": "A blazing fast code navigation helper inspired by Flash.nvim",
+  "version": "0.0.1",
+  "publisher": "haksolot",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "zoomiz.jump",
+        "title": "Zoomiz: Jump"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "zoomiz.jump",
+        "key": "alt+f",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Zoomiz",
+      "properties": {
+        "zoomiz.matchBackgroundColor": {
+          "type": "string",
+          "format": "color-hex",
+          "default": "#f9e2af4D",
+          "description": "Background color for search matches."
+        },
+        "zoomiz.matchBorderColor": {
+          "type": "string",
+          "format": "color-hex",
+          "default": "#f9e2af80",
+          "description": "Border color for search matches."
+        },
+        "zoomiz.labelBackgroundColor": {
+          "type": "string",
+          "format": "color-hex",
+          "default": "#cba6f7",
+          "description": "Background color for the jump labels."
+        },
+        "zoomiz.labelForegroundColor": {
+          "type": "string",
+          "format": "color-hex",
+          "default": "#1e1e2e",
+          "description": "Text color for the jump labels."
+        },
+        "zoomiz.labelBorderColor": {
+          "type": "string",
+          "format": "color-hex",
+          "default": "#cba6f7",
+          "description": "Border color for the jump labels."
+        },
+        "zoomiz.labelCharset": {
+          "type": "string",
+          "enum": [
+            "uppercase",
+            "lowercase",
+            "numeric"
+          ],
+          "default": "lowercase",
+          "description": "The set of characters used for jump labels. Note: 'lowercase' may conflict with search input."
+        },
+        "zoomiz.searchCaseSensitive": {
+          "type": "boolean",
+          "default": true,
+          "description": "If enabled, the search query must match the case of the text. Useful in 'lowercase' mode to break search matches and trigger jumps."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.103.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "typescript-eslint": "^8.48.1",
+    "eslint": "^9.39.1",
+    "esbuild": "^0.27.1",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
