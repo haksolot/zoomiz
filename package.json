@@ -2,7 +2,7 @@
   "name": "zoomiz",
   "displayName": "Zoomiz",
   "description": "A blazing fast code navigation helper inspired by Flash.nvim",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "haksolot",
   "icon": "images/zoomiz.png",
   "repository": {
@@ -74,17 +74,18 @@
         "zoomiz.labelCharset": {
           "type": "string",
           "enum": [
+            "flash",
             "uppercase",
             "lowercase",
             "numeric"
           ],
-          "default": "lowercase",
-          "description": "The set of characters used for jump labels. Note: 'lowercase' may conflict with search input."
+          "default": "flash",
+          "description": "The set of characters used for jump labels. 'flash' uses ergonomic Vim-like keys."
         },
         "zoomiz.searchCaseSensitive": {
           "type": "boolean",
           "default": true,
-          "description": "If enabled, the search query must match the case of the text. Useful in 'lowercase' mode to break search matches and trigger jumps."
+          "description": "If enabled, the search query must match the case of the text."
         }
       }
     }

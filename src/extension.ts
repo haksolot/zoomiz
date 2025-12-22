@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 
 // Label charsets
 const CHARSETS = {
+    flash: 'asdfjklghqwertyuiopzxcvbnmASDFJKLGHQWERTYUIOPZXCVBNM',
     uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     lowercase: 'abcdefghijklmnopqrstuvwxyz',
     numeric: '0123456789'
@@ -22,8 +23,8 @@ export function activate(context: vscode.ExtensionContext) {
 
         // Load Settings
         const config = vscode.workspace.getConfiguration('zoomiz');
-        const charsetMode = config.get<string>('labelCharset', 'uppercase') as keyof typeof CHARSETS;
-        const jumpLabels = CHARSETS[charsetMode] || CHARSETS.uppercase;
+        const charsetMode = config.get<string>('labelCharset', 'flash') as keyof typeof CHARSETS;
+        const jumpLabels = CHARSETS[charsetMode] || CHARSETS.flash;
         const isCaseSensitive = config.get<boolean>('searchCaseSensitive', false);
         
         // Dynamic Decoration Styles
@@ -131,12 +132,42 @@ export function activate(context: vscode.ExtensionContext) {
 
             // UPDATE STATE (If not jumped)
             currentTargets = [];
-            searchResults.forEach((t, i) => {
-                if (i < jumpLabels.length) {
-                    t.label = jumpLabels[i];
-                    currentTargets.push(t);
+            let labelIndex = 0;
+
+            // Collect all characters that immediately follow any match.
+            // These characters cannot be used as labels because typing them would be interpreted as refining the search.
+            const forbiddenChars = new Set<string>();
+            for (const target of searchResults) {
+                const endOffset = editor.document.offsetAt(target.range.end);
+                if (endOffset < text.length) {
+                    const char = text.charAt(endOffset);
+                    forbiddenChars.add(isCaseSensitive ? char : char.toLowerCase());
                 }
-            });
+            }
+
+            for (const target of searchResults) {
+                if (labelIndex >= jumpLabels.length) {
+                    break;
+                }
+
+                let candidateLabel = jumpLabels[labelIndex];
+
+                // Skip label if it conflicts with any possible search continuation
+                while (candidateLabel && forbiddenChars.has(isCaseSensitive ? candidateLabel : candidateLabel.toLowerCase())) {
+                    labelIndex++;
+                    if (labelIndex >= jumpLabels.length) {
+                        candidateLabel = '';
+                        break;
+                    }
+                    candidateLabel = jumpLabels[labelIndex];
+                }
+
+                if (candidateLabel) {
+                    target.label = candidateLabel;
+                    currentTargets.push(target);
+                    labelIndex++;
+                }
+            }
 
             // Render
             const matchOptions: vscode.DecorationOptions[] = currentTargets.map(t => ({ range: t.range }));
