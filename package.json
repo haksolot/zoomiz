@@ -29,6 +29,10 @@
       {
         "command": "zoomiz.jump",
         "title": "Zoomiz: Jump"
+      },
+      {
+        "command": "zoomiz.extendSelection",
+        "title": "Zoomiz: Extend Selection"
       }
     ],
     "keybindings": [
@@ -36,6 +40,21 @@
         "command": "zoomiz.jump",
         "key": "alt+f",
         "when": "editorTextFocus"
+      },
+      {
+        "command": "zoomiz.extendSelection",
+        "key": "alt+shift+f",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "zoomiz.jump",
+        "key": "s",
+        "when": "editorTextFocus && vim.mode == 'Normal'"
+      },
+      {
+        "command": "zoomiz.jump",
+        "key": "s",
+        "when": "editorTextFocus && vim.mode == 'Visual'"
       }
     ],
     "configuration": {
@@ -86,6 +105,11 @@
           "type": "boolean",
           "default": true,
           "description": "If enabled, the search query must match the case of the text."
+        },
+        "zoomiz.extendWhenSelected": {
+          "type": "boolean",
+          "default": true,
+          "description": "If enabled, starting a jump while text is selected will extend the selection instead of moving the cursor. Useful for Vim Visual mode workflows."
         }
       }
     }
