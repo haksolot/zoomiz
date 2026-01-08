@@ -2,7 +2,7 @@
   "name": "zoomiz",
   "displayName": "Zoomiz",
   "description": "A blazing fast code navigation helper inspired by Flash.nvim",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "publisher": "haksolot",
   "icon": "images/zoomiz.png",
   "repository": {
