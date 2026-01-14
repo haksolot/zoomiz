@@ -2,7 +2,7 @@
   "name": "zoomiz",
   "displayName": "Zoomiz",
   "description": "A blazing fast code navigation helper inspired by Flash.nvim",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "publisher": "haksolot",
   "icon": "images/zoomiz.png",
   "repository": {
@@ -31,8 +31,8 @@
         "title": "Zoomiz: Jump"
       },
       {
-        "command": "zoomiz.jumpAll",
-        "title": "Zoomiz: Jump All Panels"
+        "command": "zoomiz.extendSelection",
+        "title": "Zoomiz: Extend Selection"
       }
     ],
     "keybindings": [
@@ -42,9 +42,19 @@
         "when": "editorTextFocus"
       },
       {
-        "command": "zoomiz.jumpAll",
-        "key": "ctrl+alt+f",
+        "command": "zoomiz.extendSelection",
+        "key": "alt+shift+f",
         "when": "editorTextFocus"
+      },
+      {
+        "command": "zoomiz.jump",
+        "key": "s",
+        "when": "editorTextFocus && vim.mode == 'Normal'"
+      },
+      {
+        "command": "zoomiz.jump",
+        "key": "s",
+        "when": "editorTextFocus && vim.mode == 'Visual'"
       }
     ],
     "configuration": {
@@ -95,6 +105,11 @@
           "type": "boolean",
           "default": true,
           "description": "If enabled, the search query must match the case of the text."
+        },
+        "zoomiz.extendWhenSelected": {
+          "type": "boolean",
+          "default": true,
+          "description": "If enabled, starting a jump while text is selected will extend the selection instead of moving the cursor. Useful for Vim Visual mode workflows."
         }
       }
     }

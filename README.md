@@ -10,48 +10,68 @@ Zoomiz is a high-performance navigation tool for Visual Studio Code, inspired by
 ## Features
 
 * **Rapid Navigation:** Jump to any word or specific location in the viewport instantly.
-* **Superior Configurability:** Unlike other marketplace alternatives, Zoomiz offers granular control over every visual aspect and behavior, allowing it to seamlessly adapt to your specific workflow and theme.
-* **Flexible Labeling:** Configure the jump characters exactly how you want. Concatenate uppercase letters, lowercase letters, or numbers to define the jump targets to your preference.
-* **Flash.vim Inspiration:** Brings the efficiency of Vim-like search-and-jump navigation to the VS Code environment without the steep learning curve.
+* **Extend Selection:** Seamlessly extend your text selection from your current position to any jump target.
+* **Vim Integration:** Designed to work flawlessly with VSCode Vim. 
+    * Press `s` in Normal mode to jump.
+    * Press `s` in Visual mode to extend the selection to the jump target.
+* **Superior Configurability:** Granular control over every visual aspect (colors, borders) and behavior (case sensitivity, labels).
+* **Flash.vim Inspiration:** Brings the efficiency of Vim-like search-and-jump navigation to the VS Code environment.
 
 ## Usage
 
-1. Trigger Zoomiz using the default keybinding: `Alt` + `f`.
+### Basic Jumping
+1. Trigger Zoomiz using the default keybinding: `Alt` + `f` (or `s` in Vim Normal mode).
 2. Type the characters you are looking for.
 3. Zoomiz will overlay unique labels on all matches within the viewport.
 4. Type the label characters to move the cursor to that location immediately.
+
+### Extending Selection
+1. Trigger Zoomiz using `Alt` + `Shift` + `f` (or `s` in Vim Visual mode).
+2. Follow the same search-and-jump process.
+3. The selection will be extended from your starting point to the end of the target match.
+
+*Note: If `zoomiz.extendWhenSelected` is enabled (default), triggering a standard jump while text is already selected will automatically switch to "Extend Selection" mode.*
 
 ## Configuration
 
 You can customize Zoomiz by modifying your user `settings.json`.
 
-### Appearance
-Adjust the colors to match your theme or improve accessibility.
+### Behavior
 
 ```json
-"zoomiz.backgroundColor": "#ff007f",
-"zoomiz.textColor": "#ffffff",
-"zoomiz.matchColor": "#FFFF00"
+"zoomiz.searchCaseSensitive": true, // Match case when searching
+"zoomiz.extendWhenSelected": true   // Automatically extend selection if text is already selected when jumping
+```
+
+### Appearance
+Adjust the colors to match your theme.
+
+```json
+"zoomiz.matchBackgroundColor": "#f9e2af4D",
+"zoomiz.matchBorderColor": "#f9e2af80",
+
+"zoomiz.labelBackgroundColor": "#cba6f7",
+"zoomiz.labelForegroundColor": "#1e1e2e",
+"zoomiz.labelBorderColor": "#cba6f7"
 ```
 
 ### Character Set
-Define the pool of characters used for generating jump labels. You can combine uppercase, lowercase, and numeric characters.
+Define the pool of characters used for generating jump labels.
 
 ```json
-// Example: Restrict to lowercase only
-"zoomiz.characters": "abcdefghijklmnopqrstuvwxyz"
-
-// Example: Use numbers and uppercase for specific keyboard layouts
-"zoomiz.characters": "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+"zoomiz.labelCharset": "flash" // Options: "flash", "uppercase", "lowercase", "numeric"
 ```
 
 ## Keybindings
 
-| Command | Keybinding |
-| :--- | :--- |
-| `zoomiz.jump` | `Alt` + `f` |
+| Command | Keybinding | Context |
+| :--- | :--- | :--- |
+| `zoomiz.jump` | `Alt` + `f` | Editor Focus |
+| `zoomiz.extendSelection` | `Alt` + `Shift` + `f` | Editor Focus |
+| `zoomiz.jump` | `s` | Vim Normal Mode |
+| `zoomiz.jump` | `s` | Vim Visual Mode (Extends selection) |
 
-You can remap this command via the Keyboard Shortcuts menu (`Ctrl`+`K` `Ctrl`+`S`) by searching for `zoomiz.jump`.
+You can remap these commands via the Keyboard Shortcuts menu (`Ctrl`+`K` `Ctrl`+`S`) by searching for `zoomiz.jump` or `zoomiz.extendSelection`.
 
 ## Contributing
 
