@@ -29,12 +29,21 @@
       {
         "command": "zoomiz.jump",
         "title": "Zoomiz: Jump"
+      },
+      {
+        "command": "zoomiz.jumpAll",
+        "title": "Zoomiz: Jump All Panels"
       }
     ],
     "keybindings": [
       {
         "command": "zoomiz.jump",
         "key": "alt+f",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "zoomiz.jumpAll",
+        "key": "ctrl+alt+f",
         "when": "editorTextFocus"
       }
     ],
