@@ -9,12 +9,13 @@ const CHARSETS = {
 };
 
 interface JumpTarget {
+    editor: vscode.TextEditor;
     range: vscode.Range;
     label: string;
 }
 
 export function activate(context: vscode.ExtensionContext) {
-
+https://github.com/haksolot/zoomiz/pull/1/conflict?name=src%252Fextension.ts&ancestor_oid=faa50b644456ac00356ea2fdc8d68c59c92106de&base_oid=f5ad359e2f1e3cde4b555e1e814966e7eaa09977&head_oid=9939de087f6076688ff4638f8d6e48b4cba72d82
     context.subscriptions.push(vscode.commands.registerCommand('zoomiz.jump', () => {
         startZoomiz('jump');
     }));
